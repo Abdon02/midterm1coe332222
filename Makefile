@@ -1,4 +1,3 @@
-
 #This is to build the docker image
 build: 
 	docker build -t abdon02/iss_station:midterm1 .
@@ -12,7 +11,7 @@ shell: build
 	docker run --rm  -it abdon02/iss_station:midterm1 /bin/bash 
 
 #This is to delete and remove the docker image from docker images and docker ps
-test: 
+test:  
 	curl -X GET localhost:5036/
 	curl -X POST localhost:5036/data
 	curl -X GET localhost:5036/get_epochs
@@ -22,6 +21,14 @@ test:
 	curl -X GET localhost:5036/countries/Turkey/regions
 	curl -X GET localhost:5036/countries/Turkey/regions/None
 	curl -X GET localhost:5036/countries/Turkey/regions/None/cities
+
+#This is to push the docker image up to Docker Hub
+push:
+	docker push abdon02/iss_station:midterm1
+
+#This is to pull the docker image from DockerHub
+pull:
+	docker pull abdon02/iss_station:midterm1
 
 #This is to read the logging displayed by the container
 logging: 
