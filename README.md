@@ -40,7 +40,7 @@ This project is about working with Docker containers, Makefiles, API, and Flask 
     - This data file is an XML file that contains information about the ISS space station sightings around the world. Here is an example of a data set:
         ```
         <visible_pass><country>Netherlands</country><region>None</region><city>Zeist</city><spacecraft>ISS</spacecraft><sighting_date>Sat Feb 19/07:05 AM</sighting_date><duration_minutes>5</duration_minutes><max_elevation>20</max_elevation><enters>10 above SSW</enters><exits>10 above E</exits><utc_offset>1.0</utc_offset><utc_time>06:05</utc_time><utc_date>Feb 19, 2022</utc_date></visible_pass>
-
+        ect ...
         ```
     - You can pull this file from the internet using this command: 
         ```
@@ -109,6 +109,28 @@ This project is about working with Docker containers, Makefiles, API, and Flask 
         #Testing the function that prints out the welcome message
         def test_welcome_message():
             assert isinstance(welcome_message(), str) == True
+        ```
+    - To run the test file, it you need to first run the container and interact with it. To do that do this command:
+        ```
+        docker run --rm  -it abdon02/iss_station:midterm1 /bin/bash
+        pytest /code
+        
+        or 
+        
+        By using the Makefile, do this command:
+            make shell
+            pytest /code
+        ```
+    - The output of running this test should look like this:
+        ```
+        ======================================== test session starts ========================================
+        platform linux -- Python 3.6.8, pytest-7.0.0, pluggy-1.0.0
+        rootdir: /code
+        collected 1 item
+
+        test_app.py .                                                                                 [100%]
+
+        ========================================= 1 passed in 0.30s =========================================
         ```
 
 ### **_How was the Docker image built?_**
@@ -222,5 +244,4 @@ You can read what each function returns for each route of this API by doing this
 ```
 curl -X GET localhost:5036/
 ```
-
 
