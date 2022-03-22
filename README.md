@@ -76,6 +76,12 @@ This project is about working with Docker containers, Makefiles, API, and Flask 
                 curl -X GET localhost:5036/countries/Turkey/regions
                 curl -X GET localhost:5036/countries/Turkey/regions/None
                 curl -X GET localhost:5036/countries/Turkey/regions/None/cities
+                
+        #This is to push the Dockerfile to DockerHub for others to use
+            docker push abdon02/iss_station:midterm1
+            
+        #This is to pull the Dockerfile from DockerHub:
+            docker pull abdon02/iss_station:midterm1
 
         #This is to read the logging displayed by the container
         logging:
@@ -159,6 +165,22 @@ The Docker image, was built with the help of **"Dockerfile"**. The Dockerfile ha
     WORKDIR /code/
     CMD ["python3","/code/app.py"]
     ```
+- To push the Docker file to Docker Hub for others to use. It is important to build the Docker image from the Dockerfile, and then follow the commands bellow: 
+    ```
+    docker push abdon02/iss_station:midterm1
+    
+    or 
+    
+    make push (from the Makefile)
+    ```
+- You can also pull this DockerFile from DockerHub by using this command:
+    ```
+    docker pull abdon02/iss_station:midterm1
+    
+    or 
+    
+    make pull (from the Makefile)
+    ```
 - After including all the ingredients for the **"Dockerfile"**, I used the following command to build the Dockerfile into a Docker Image, with a tag "midterm1", and a special name, "abemidterm1". Also, I ran a server in the background so we could test out the Rest API and made sure the routes were returning the correct thing from the inputted request by the user.
     ```
     docker run --name "abemidterm1" -d -p 5036:5000 abdon02/iss_station:midterm1
@@ -175,7 +197,6 @@ The Docker image, was built with the help of **"Dockerfile"**. The Dockerfile ha
     ```
     make stop
     ```
-
 ### **_Analyzing the results from the API_**
 ---
 After using the **"Makefile"** that was provided above, and running the test to make sure the Rest API was returning the correct information. This would the final outcome cut into pieces: 
@@ -244,4 +265,3 @@ You can read what each function returns for each route of this API by doing this
 ```
 curl -X GET localhost:5036/
 ```
-
