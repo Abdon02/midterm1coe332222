@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 import sys
 import xmltodict
+from typing import List
 import logging
 
 #Setting up the logging
@@ -15,7 +16,7 @@ sighting_data = {}
 
 #This function will populate the two global varaibles, 'positional_data' and 'sighting_data' with data from the xml files that were provided
 @app.route('/data', methods=['POST', 'GET'])
-def set_variables():
+def set_variables() -> str:
     '''
     This function will set the global variables with the correspoding XML data
 
@@ -24,7 +25,8 @@ def set_variables():
         sighting_data_file (string): It is a string that is the name of the file for sighting_data.
 
     Returns:
-        This function will return nothing, it will only set the global varaibles with the correct data.
+        This function will return a string, it will only set the global varaibles with the correct 
+        data. It will return a string to the user if the global variables were populated sucesfully.
     '''
     #If statement incase the user inputs a method anything other than Post
     if(request.method != 'POST'):
@@ -55,7 +57,7 @@ curl -X POST localhost:5036/reset
 
 #The purpose of this route: Retuns information on how to interact with the application, (GET)
 @app.route('/', methods=['GET', 'POST'])
-def welcome_message():
+def welcome_message() -> str:
     '''
     This function will display a welcoem messsage to the user, and will tell the user how to use this application
 
@@ -89,7 +91,7 @@ Routes for querying sighting data:
     
 #The purpose of this route: Returns all Epochs in the positional data, I am assuming that I will return a list of dictionary that each contain data of all Epochs in poistional data. (GET)
 @app.route('/get_epochs', methods=['GET', 'POST'])
-def get_all_epochs():
+def get_all_epochs() -> List:
     '''
     This function will display all of the epoch information for the user to see
 
@@ -151,7 +153,7 @@ def get_all_epochs():
 
 #The purpose of this route: Returns all the information about a specific Epoch in the positional data, (GET)
 @app.route('/get_epochs/<extra_info>', methods=['GET', 'POST'])
-def get_extra_info_for_epoch(extra_info):
+def get_extra_info_for_epoch(extra_info: str) -> dict:
     '''
     This function will take an argument for a specific epoch time, and it will return extra 
     information about htat epoch and that specific extra informantion
@@ -161,7 +163,7 @@ def get_extra_info_for_epoch(extra_info):
         looking for. 
 
     Return:
-        state_of_vector (dictionary): It is a dictioanry that pertains to the epoch taking into account
+        state_of_vector (dictionary): It is a dictionary that pertains to the epoch taking into account
         the inputted extra_info by the user. In this dictionary it will contain information like:
         X, Y , Z, X_DOT, Y_DOT, Z_DOT information that will be acceptable for the user to look at
     '''
@@ -213,7 +215,7 @@ def get_extra_info_for_epoch(extra_info):
 
 #The purpose of this route: Returns all the countries from the sighting data, (GET)
 @app.route('/countries', methods=['GET', 'POST'])
-def all_countries():
+def all_countries() -> List:
     '''
     This function will return a list of all the countries that are in the sighting_data
 
@@ -274,7 +276,7 @@ def all_countries():
 
 #The purpose of this route: Returns all information about a specific Country in the sighting data, (GET)
 @app.route('/countries/<country_name>', methods=['GET', 'POST'])
-def get_country_info(country_name):
+def get_country_info(country_name: str) -> List[dict]:
     '''
     This function will return extra information concerning the country name that was inputted.
 
@@ -341,7 +343,7 @@ def get_country_info(country_name):
 
 #The purpose of this route: Returns all information about a specific Region in the sighting data, (GET)
 @app.route('/countries/<country>/regions', methods=['GET', 'POST'])
-def get_country_regions(country):
+def get_country_regions(country: str) -> List:
     '''
     This function will return all the regions in for the inputted <country>
 
@@ -405,7 +407,7 @@ def get_country_regions(country):
 
 #The purpose of this route: Returns all cities associated with a given Country nad Region in the sighting data, (GET)
 @app.route('/countries/<country>/regions/<region>', methods=['GET', 'POST'])
-def get_region_info(country, region):
+def get_region_info(country: str, region: str) -> dict:
     '''
     Thic function will return info about that country with the mathing region type given by the user.
 
@@ -471,7 +473,7 @@ def get_region_info(country, region):
 
 #The purpose of this route: Returns all information about a specific City in the sighting data, (GET)
 @app.route('/countries/<country>/regions/<region>/cities', methods=['GET', 'POST'])
-def get_cities(country, region):
+def get_cities(country: str, region: str) -> List:
     '''
     This function gathers all the cities that fit in to the description of the wated coutry and type 
     of region that the user wanted
