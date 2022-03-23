@@ -265,3 +265,14 @@ You can read what each function returns for each route of this API by doing this
 ```
 curl -X GET localhost:5036/
 ```
+
+## **_Citations_**
+---
+- Positional Data File:
+    ```
+    Amazonaws.com, 2022, nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_OEM/ISS.OEM_J2K_EPH.xml. Accessed 23 Mar. 2022.
+    ```
+- Sighting Data File:
+    ```
+    Amazonaws.com, 2022, nasa-public-data.s3.amazonaws.com/iss-coords/2022-02-13/ISS_sightings/XMLsightingData_citiesINT04.xml. Accessed 23 Mar. 2022.
+    ```
